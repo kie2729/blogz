@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Build a Blog blog</h1>
+    <form method='post' action='/add_post'>
+        <input type='submit' name='new_post' value='Create a new post'
+    <hr />
+
+    <br>
+    <h2>Old Posts</h2>
+
+    <ul>
+        {% for post in posts %}
+            <h3><p>{{post.title}}</p></h3>
+            <p>{{post.content}}</p>
+            <br>
+                   
+        {% endfor %}
+    </ul>
+
+{% endblock %}
