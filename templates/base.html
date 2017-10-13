@@ -4,9 +4,21 @@
         <title>{{title}}</title>
     </head>
     <body>
+        {% with messages = get_flashed_messages(with_categories=True) %}
+            <ul>
+            {% for category, message in messages %}
+                <li class="{{category}}">{{message}}</li>
+            {% endfor %}
+            </ul>
+        {% endwith %}
         
         {% block content %}
+
         {% endblock %}
+
+        <nav>
+            <a href="/">Home</a> 
+        </nav>
 
     </body>
 </html>

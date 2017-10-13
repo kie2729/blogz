@@ -3,7 +3,7 @@
 {% block content %}
     <h1>Build a Blog blog</h1>
     <form method='post' action='/add_post'>
-        <input type='submit' name='new_post' value='Create a new post'
+        <input type='submit' name='new_post' value='Create a new post' />
     <hr />
 
     <br>
@@ -11,7 +11,7 @@
 
     <ul>
         {% for post in posts %}
-            <h3><p>{{post.title}}</p></h3>
+            <h3><p><a href ='/single?id={{post.post_id}}'>{{post.title}}</a></p></h3>
             <p>{{post.content}}</p>
             <br>
                    
