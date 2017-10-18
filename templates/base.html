@@ -1,24 +1,33 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
     <head>
         <title>{{title}}</title>
+        <style>
+            .error{
+                color: red;
+            }
+        </style>
     </head>
-    <body>
-        {% with messages = get_flashed_messages(with_categories=True) %}
-            <ul>
-            {% for category, message in messages %}
-                <li class="{{category}}">{{message}}</li>
-            {% endfor %}
-            </ul>
-        {% endwith %}
-        
-        {% block content %}
+<body>
+    <div>
+        <a href='/logout'>log out</a>
+    </div>
 
-        {% endblock %}
+    {% with messages = get_flashed_messages(with_categories=True) %}
+        <ul>
+        {% for category, message in messages %}
+            <li class="{{category}}">{{message}}</li>
+        {% endfor %}
+        </ul>
+    {% endwith %}
 
-        <nav>
-            <a href="/">Home</a> 
-        </nav>
+    {% block content %}
 
-    </body>
+    {% endblock %}
+
+    <nav>
+        <a href="/home">Home</a> 
+    </nav>
+
+</body>
 </html>
