@@ -37,8 +37,19 @@ class Post(db.Model):
 @app.route('/', methods=['POST', 'GET'])
 def index():
     posts = Post.query.order_by(Post.post_id).all()
+    users = User.query.all()
+    """
+    joined_user = User.query.filter_by(user_id=owner_id???(Post.query.filter_by(post_id=post_id).first()))
+    """
 
-    return render_template('blogmain.html', title='Build-a-blog', posts = posts)
+    return render_template('blogmain.html', posts = posts)
+
+    """
+    TODO-put in author name/link to get to /single page
+    for post in posts:
+        for user in users:
+            result = session.query(User, Post).select_from(join(User, Post)).filter_by(user.user_id=post.owner_id).all()
+  """
 
 @app.route('/signup',methods=['GET','POST'])
 def signup():
@@ -86,7 +97,8 @@ def home():
 @app.route('/one_user')
 def one_user():
     id= request.args['id']
-    username = User.query.filter_by(user_id=id).first()
+    user = User.query.filter_by(user_id=id).first()
+    username = user.username
     posts = Post.query.filter_by(owner_id = id).all()
 
     return render_template('one_user.html', posts=posts, username=username)
@@ -136,7 +148,9 @@ def latest():
 def single():
     id= request.args['id']
     post = Post.query.filter_by(post_id = id).first()
-    return render_template('single.html', title=post.title, content=post.content)
+    user_id = post.owner_id
+    username = User.query.filter_by(user_id = user_id).first()
+    return render_template('single.html', user_id=user_id, title=post.title, content=post.content, username=username.username)
 
 if __name__ == '__main__':
     app.run()
