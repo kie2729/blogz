@@ -38,11 +38,14 @@ class Post(db.Model):
 def index():
     posts = Post.query.order_by(Post.post_id).all()
     users = User.query.all()
+
+    username = User.query.filter_by(user_id=Post.owner_id).all()
+
     """
     joined_user = User.query.filter_by(user_id=owner_id???(Post.query.filter_by(post_id=post_id).first()))
     """
 
-    return render_template('blogmain.html', posts = posts)
+    return render_template('blogmain.html', posts = posts, username = username)
 
     """
     TODO-put in author name/link to get to /single page
