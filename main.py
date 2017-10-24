@@ -37,22 +37,8 @@ class Post(db.Model):
 @app.route('/', methods=['POST', 'GET'])
 def index():
     posts = Post.query.order_by(Post.post_id).all()
-    users = User.query.all()
-
-    username = User.query.filter_by(user_id=Post.owner_id).all()
-
-    """
-    joined_user = User.query.filter_by(user_id=owner_id???(Post.query.filter_by(post_id=post_id).first()))
-    """
-
-    return render_template('blogmain.html', posts = posts, username = username)
-
-    """
-    TODO-put in author name/link to get to /single page
-    for post in posts:
-        for user in users:
-            result = session.query(User, Post).select_from(join(User, Post)).filter_by(user.user_id=post.owner_id).all()
-  """
+    
+    return render_template('blogmain.html', posts = posts)
 
 @app.route('/signup',methods=['GET','POST'])
 def signup():
